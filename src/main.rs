@@ -253,36 +253,103 @@
 // ================================Chapter5 항목입니다. ============================================ //
 
 // ================================Chapter6 항목입니다 ============================================ //
-fn main() {
-  /*
-    Chapter6. 참조
+// fn main() {
+//   /*
+//     Chapter6. 참조
 
-    참조는 C#의 ref 기능과 비슷한 기능이다.
-    러스트에서는 참조에 키워드는 ref 대신, &를 사용한다.
-  */
+//     참조는 C#의 ref 기능과 비슷한 기능이다.
+//     러스트에서는 참조에 키워드는 ref 대신, &를 사용한다.
+//   */
 
-  // 이 예제는 & 참조의 예제이다.
-  // get_size 함수에 main 함수에 있는 x 변수를 넘겨서, 넘겨진 값의 길이를 알아오는 코드이다. 
+//   // 이 예제는 & 참조의 예제이다.
+//   // get_size 함수에 main 함수에 있는 x 변수를 넘겨서, 넘겨진 값의 길이를 알아오는 코드이다. 
 
 
-  // let x = String::from("ㅁㄴㅇㄻㄴㅇㄹ");
-  // println!("{}", get_size(&x));
+//   // let x = String::from("ㅁㄴㅇㄻㄴㅇㄹ");
+//   // println!("{}", get_size(&x));
 
-  // 기변 참조 
-  // 러스트는 기본적으로 불변인데, 그래서, 기변 참조는 mut 키워드를 사용해야 한다.
+//   // 기변 참조 
+//   // 러스트는 기본적으로 불변인데, 그래서, 기변 참조는 mut 키워드를 사용해야 한다.
 
-    let mut s = String::from("ㅁㄴㅇㄹ");
+//     let mut s = String::from("ㅁㄴㅇㄹ");
 
-    test(&mut s);
+//     test(&mut s);
 
-    println!("{}", s);
+//     println!("{}", s);
 
-  fn test(s: &mut String) {
-     s.push_str(", world!");
-  }
+//   fn test(s: &mut String) {
+//      s.push_str(", world!");
+//   }
 
+// }
+
+// // fn get_size(s: &String) -> usize {
+// //   s.len()
+// // }
+
+// ==================== Chapter6 항목입니다. ===========================================/
+
+// ==================== Chapter7 항목입니다.============================================/
+
+// Chapter7. 구조체 & impl
+
+// 구조체란 서로 관련있는 여러 값을 의미하는 하나로 모으고, 이름을 정해 접근할 수 있는 사용자 정의 타입이다.
+
+// 구조체의 키워드는 struct 키워드 혹은 iapl 키워드로 나눔
+
+// 1.struct 키워드 
+// struct Point {
+//    x: usize,
+//    y: usize
+// }
+
+// /*
+// struct Name {
+//   item: datatype
+// }
+// */
+
+// fn main() {
+//   let loc = Point { x: 10, y: 20};
+//   println!("x: {}, y:{}", loc.x, loc.y);
+// }
+
+// 2. impl 키워드 
+// impl은 러스에 있는 특이한 기능이다.
+
+// struct Point {
+//    x: usize,
+//    y: usize
+// }
+
+// fn print_loc(loc: Point) {
+//   println!("x: {}, y:{}", loc.x, loc.y)
+// }
+
+// fn main() {
+//   let loc = Point { x: 10, y: 20};
+//   print_loc(loc)
+// }
+
+// 좀더 깔끔하게 고쳐보자.
+// .print_loc()은 메서드 문법이라 불린다. 함수와 흡사함
+struct Point {
+  x: usize,
+  y: usize
 }
 
-// fn get_size(s: &String) -> usize {
-//   s.len()
-// }
+// impl 블록의 print_loc의 매개변수에는 &self
+// 여기서 self는 Point 구조체를 의미
+// 즉, self는 x,y 라는 아이템이 잇고, 아이템을 사용할때는 &self.이름으로 사용하면 된다.
+impl Point {
+  fn print_loc(&self) {
+      println!("x: {}, y:{}", &self.x, &self.y)
+  }
+}
+
+fn main() {
+  let loc = Point { x: 10, y: 20};
+  loc.print_loc()
+}
+
+// ==================== Chapter7 항목입니다. =========================================/
