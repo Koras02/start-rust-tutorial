@@ -333,23 +333,91 @@
 
 // 좀더 깔끔하게 고쳐보자.
 // .print_loc()은 메서드 문법이라 불린다. 함수와 흡사함
-struct Point {
-  x: usize,
-  y: usize
-}
+// struct Point {
+//   x: usize,
+//   y: usize
+// }
 
-// impl 블록의 print_loc의 매개변수에는 &self
-// 여기서 self는 Point 구조체를 의미
-// 즉, self는 x,y 라는 아이템이 잇고, 아이템을 사용할때는 &self.이름으로 사용하면 된다.
-impl Point {
-  fn print_loc(&self) {
-      println!("x: {}, y:{}", &self.x, &self.y)
-  }
-}
+// // impl 블록의 print_loc의 매개변수에는 &self
+// // 여기서 self는 Point 구조체를 의미
+// // 즉, self는 x,y 라는 아이템이 잇고, 아이템을 사용할때는 &self.이름으로 사용하면 된다.
+// impl Point {
+//   fn print_loc(&self) {
+//       println!("x: {}, y:{}", &self.x, &self.y)
+//   }
+// }
 
-fn main() {
-  let loc = Point { x: 10, y: 20};
-  loc.print_loc()
-}
+// fn main() {
+//   let loc = Point { x: 10, y: 20};
+//   loc.print_loc()
+// }
 
 // ==================== Chapter7 항목입니다. =========================================/
+
+// ==================== Chapter8 항목입니다. =========================================//
+/* Chapter8. 열거자 & match (+option)
+  열거자는 그리 생소한 개념이 아니다. 흔히 enum 키워드를 사용해 선언을한다.
+  러스트에서도 enum을 사용한다.
+*/
+
+use ChannelType::*;
+
+enum ChannelType {
+    TextChannel,
+    VoiceChannel,
+    StageChannel,
+    Other
+}
+
+let channel = TextChannel;
+
+
+match channel {
+    TextChannel => println!("텍스트 채널입니다."),
+    VoiceChannel => println!("음성 채널입니다."),
+    StageChannel => println!("스테이지 채널입니다."),
+    _ =>  println!("*알 수 없음*"),
+}
+
+// match 키워드
+// match 키워드는 다른 언어에서 사용하는 switch문과 흡사하다. 
+// if문과 흡사하지만, 더 깔끔하다.
+// match는 enum과 함께 사용시 물을 싫어하는 고양이가 물에 들어가 김치찌개를 먹고 얼큰하다~라고 말할 정도로 기가 막히다는 것
+let  x = 10;
+match x {
+  10 => println!("저는 10입니다."),
+  20 => println!("저는 20인데요."),
+  _ => println!("*아무것도 아닌데요")
+}
+
+// Option<T>
+/*
+  Option enum은 러스트에서 기본적으로 제공하는 enum이다 
+  어떤기능을 가질까? 
+  일단 러스트에는 null 개념이 없다.
+  이는 런타임중 오류가 발생하는 것을 방지하기 위해 null이 없는것이다. 
+
+  하지만 null이 필요한 상황이 있을 수도 있다.
+  이럴때는 option<T>을 사용하면 된다.
+  <T>는 제네릭 타입이다.
+
+  Option에는 2가지 아이템이 있는데 
+  Some() 과 None이 있다.
+
+  Some()은 어떤 값이 들어가도 된다. None은 Null 과 비슷 하며 어떠한 값도 필요없다.
+*/
+
+// 이를 match로 사용한 예제 
+let mut x = None; // 아무 값도 없음 (null)
+let result = match x { 
+  Some(e) => e,
+  None => 0;
+} // result에는 0이 들어있음 
+
+let mut x = Some(1972) // Some | 1972값이 들어있음 
+let result = match x {
+  Some(e) => e,
+  None => 0,
+} // result에는 1972rk emfdjdlTek.
+
+// ==================== Chapter8 항목입니다. =========================================//
